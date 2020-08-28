@@ -1,5 +1,6 @@
 {
     "username": "",
     "password": "",
-    "serverchan": ""
+    "serverchan": "",
+    "port":""
 }

@@ -9,6 +9,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 app = Flask("xdu_electricity_balance")
 
 server_chan = ''
+port = '80'
 
 
 class EnergySession(requests.Session):
@@ -82,9 +83,11 @@ class APSchedulerJobConfig(object):
 
 def init():
     global server_chan
+    global port
     js = file_util.read_all_text('config.json')
     js = json.loads(js)
     server_chan = js['serverchan']
+    port = js['port']
 
     # 初始化Flask-APScheduler，定时任务
     scheduler = APScheduler(BackgroundScheduler(timezone="Asia/Shanghai"))
@@ -94,7 +97,8 @@ def init():
 
 def main():
     init()
-    app.run(host='0.0.0.0', port='80')
+    global port
+    app.run(host='0.0.0.0', port=port)
 
 
 if __name__ == "__main__":
