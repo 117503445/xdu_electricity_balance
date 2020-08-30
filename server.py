@@ -51,6 +51,7 @@ def crawl(username, password):
 
 @app.route('/api/me', methods=['get'])
 def me():
+    print('me')
     global server_chan
     js = file_util.read_all_text('config.json')
     js = json.loads(js)
@@ -89,6 +90,7 @@ def init():
     server_chan = js['serverchan']
     port = js['port']
 
+    app.config.from_object(APSchedulerJobConfig)
     # 初始化Flask-APScheduler，定时任务
     scheduler = APScheduler(BackgroundScheduler(timezone="Asia/Shanghai"))
     scheduler.init_app(app)
