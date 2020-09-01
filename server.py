@@ -8,7 +8,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask("xdu_electricity_balance")
 
-server_chan = ''
 port = '80'
 
 
@@ -52,13 +51,22 @@ def crawl(username, password):
 @app.route('/api/me', methods=['get'])
 def me():
     print('me')
-    global server_chan
+
     js = file_util.read_all_text('config.json')
     js = json.loads(js)
 
-    res, kede = crawl(js['username'], js['password'])
-    requests.get(
-        f'https://sc.ftqq.com/{server_chan}.send?text=电表剩余量{kede}&desp={res}')
+    users = js['users']
+
+    s = ''
+
+    for user in users:
+        print(user['username'], user['password'], )
+        serverchan = user['serverchan']
+        res, kede = crawl(user['username'], user['password'])
+        requests.get(
+            f'https://sc.ftqq.com/{serverchan}.send?text=电表剩余量{kede}&desp={res}')
+
+        s += res + '\n'
 
     return res
 
@@ -83,11 +91,9 @@ class APSchedulerJobConfig(object):
 
 
 def init():
-    global server_chan
     global port
     js = file_util.read_all_text('config.json')
     js = json.loads(js)
-    server_chan = js['serverchan']
     port = js['port']
 
     app.config.from_object(APSchedulerJobConfig)

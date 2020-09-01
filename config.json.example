@@ -1,6 +1,15 @@
 {
-    "username": "",
-    "password": "",
-    "serverchan": "",
-    "port":""
+    "users": [
+        {
+            "username": "",
+            "password": "",
+            "serverchan": ""
+        },
+        {
+            "username": "",
+            "password": "",
+            "serverchan": ""
+        }
+    ],
+    "port": ""
 }
