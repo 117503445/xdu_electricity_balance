@@ -82,7 +82,7 @@ class APSchedulerJobConfig(object):
             'trigger': {
                 'type': 'cron',
                 'day_of_week': "0-6",
-                'hour': '0-23',
+                'hour': '7',
                 'minute': '0',
                 'second': '0'
             }
