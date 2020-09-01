@@ -61,12 +61,12 @@ def me():
 
     for user in users:
         print(user['username'], user['password'], )
-        serverchan = user['serverchan']
+        serverchans = user['serverchan']
         res, kede = crawl(user['username'], user['password'])
-        requests.get(
-            f'https://sc.ftqq.com/{serverchan}.send?text=电表剩余量{kede}&desp={res}')
-
         s += res + '\n'
+        for serverchan in serverchans:
+            requests.get(
+                f'https://sc.ftqq.com/{serverchan}.send?text=电表剩余量{kede}&desp={res}')
 
     return res
 

@@ -3,12 +3,12 @@
         {
             "username": "",
             "password": "",
-            "serverchan": ""
+            "serverchan": [ "" , "" ]
         },
         {
             "username": "",
             "password": "",
-            "serverchan": ""
+            "serverchan": [ "" , "" ]
         }
     ],
     "port": ""
